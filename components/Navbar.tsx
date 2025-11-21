@@ -8,6 +8,7 @@ import {
   Box, Barcode, HelpCircle, Truck, Plane, ChevronRight, ChevronDown 
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import AnnouncementBar from "./AnnouncementBar"; // <--- IMPORTAMOS LA BARRA AQUÍ
 
 // Datos de los servicios
 const servicesList = [
@@ -19,32 +20,11 @@ const servicesList = [
   { title: "Envíos internacionales", icon: Plane, color: "bg-blue-100 text-blue-600", href: "#" },
 ];
 
-// CONFIGURACIÓN DE MARCAS
 const brands = [
-  { 
-    name: "DHL", 
-    image: "/dhl.svg", 
-    bg: "bg-[#FFCC00]", // Amarillo DHL
-    whiteLogo: false     // Logo original (Rojo)
-  },
-  { 
-    name: "FedEx", 
-    image: "/fedex.svg", 
-    bg: "bg-[#F2F2F2]", // CAMBIO: Gris muy claro para que resalte el logo Morado/Naranja
-    whiteLogo: false     // CAMBIO: Logo original
-  },
-  { 
-    name: "Estafeta", 
-    image: "/estafeta.svg", 
-    bg: "bg-[#C60C30]", // Rojo Estafeta
-    whiteLogo: true      // Logo blanco
-  },
-  { 
-    name: "Paquetexpress", 
-    image: "/paqueteexpress.svg", 
-    bg: "bg-[#003399]", // Azul Paquetexpress
-    whiteLogo: true      // Logo blanco
-  },
+  { name: "DHL", image: "/dhl.svg", bg: "bg-[#FFCC00]", whiteLogo: false },
+  { name: "FedEx", image: "/fedex.svg", bg: "bg-[#F2F2F2]", whiteLogo: false },
+  { name: "Estafeta", image: "/estafeta.svg", bg: "bg-[#C60C30]", whiteLogo: true },
+  { name: "Paquetexpress", image: "/paqueteexpress.svg", bg: "bg-[#003399]", whiteLogo: true },
 ];
 
 export default function Navbar() {
@@ -52,9 +32,13 @@ export default function Navbar() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   return (
+    // El header contiene TODO (Anuncio + Barra Morada + Barra Blanca) y es fijo
     <header className="w-full fixed top-0 z-50 shadow-sm font-sans" onMouseLeave={() => setIsServicesOpen(false)}>
       
-      {/* --- BARRA SUPERIOR --- */}
+      {/* 1. BARRA DE ANUNCIOS (Ahora vive aquí dentro) */}
+      <AnnouncementBar />
+
+      {/* 2. BARRA SUPERIOR (Morada) */}
       <div className="bg-[#46075E] text-white text-xs md:text-sm py-2.5 px-4 border-b border-white/10 relative z-50">
         <div className="max-w-[1400px] mx-auto flex justify-between items-center">
           <div className="hidden md:flex gap-8 font-medium tracking-wide">
@@ -77,7 +61,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* --- BARRA INFERIOR --- */}
+      {/* 3. BARRA INFERIOR (Blanca) */}
       <div className="bg-white py-4 px-4 shadow-sm relative z-50">
         <div className="max-w-[1400px] mx-auto flex justify-between items-center relative">
           
@@ -122,6 +106,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* ... EL RESTO DEL CÓDIGO (Mega Menú y Menú Móvil) SE QUEDA IGUAL ... */}
       {/* --- MEGA MENÚ --- */}
       <AnimatePresence>
         {isServicesOpen && (
@@ -133,8 +118,6 @@ export default function Navbar() {
             className="hidden md:block absolute top-full left-0 w-full bg-white border-t border-gray-100 shadow-xl z-40 py-10 px-4"
           >
             <div className="max-w-[1400px] mx-auto">
-              
-              {/* Cards Servicios */}
               <div className="grid grid-cols-3 gap-6 mb-12">
                 {servicesList.map((service, index) => (
                   <Link key={index} href={service.href} className="bg-white border border-gray-100 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:shadow-md transition-shadow group">
@@ -150,8 +133,6 @@ export default function Navbar() {
                   </Link>
                 ))}
               </div>
-
-              {/* PAQUETERÍAS */}
               <div className="text-center">
                 <h3 className="text-lg font-bold text-gray-800 mb-8">Paqueterías Nacionales</h3>
                 <div className="flex justify-center items-center gap-10 flex-wrap">
@@ -173,7 +154,6 @@ export default function Navbar() {
                   ))}
                 </div>
               </div>
-
             </div>
           </motion.div>
         )}

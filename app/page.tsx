@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "@/components/Navbar";
+import AnnouncementBar from "@/components/AnnouncementBar"; // <--- IMPORTAR AQUÍ
 import Hero from "@/components/Hero"; 
 import PromoSection from "@/components/PromoSection"; 
 import VolumeDiscount from "@/components/VolumeDiscount"; 
@@ -16,34 +17,27 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-white">
       
+      {/* 0. BARRA DE ANUNCIOS (NUEVA) */}
+      <AnnouncementBar />
+
       {/* 1. BARRA DE NAVEGACIÓN */}
       <Navbar />
 
-      {/* 2. HERO (Avión + Cards) */}
+      {/* 2. HERO */}
       <Hero />
 
-      {/* 3. PROMOCIONES (Shopify + 40% Off) */}
+      {/* 3. PROMOCIONES */}
       <PromoSection />
 
-      {/* 4. DESCUENTO POR VOLUMEN (Confeti) */}
+      {/* 4. DESCUENTO POR VOLUMEN (Corregido z-index) */}
       <VolumeDiscount />
       
-      {/* 5. BANNER PRECIOS (Desde $80) */}
+      {/* ... resto de secciones ... */}
       <PricingBanner />
-
-      {/* 6. VENTAJAS (Iconos en círculo) */}
       <AdvantagesSection />
-
-      {/* 7. TIPOS DE ENVÍO (Next Day, LTL, etc.) */}
       <ShippingTypes />
-
-      {/* 8. CÓMO FUNCIONA (4 Pasos animados) */}
       <HowItWorks />
-
-      {/* 9. COMIENZA HOY (Cajas flotantes) */}
       <StartToday />
-      
-      {/* 10. TARJETAS INFO (Rastreo y Blog) */}
       <InfoCards />
 
       {/* 11. CTA FINAL */}
