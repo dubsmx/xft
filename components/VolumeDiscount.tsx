@@ -19,17 +19,18 @@ export default function VolumeDiscount() {
         {/* --- BANNER PRINCIPAL --- */}
         <div className="relative bg-gradient-to-r from-[#8E1979] to-[#b92b9c] rounded-[2.5rem] shadow-2xl overflow-hidden p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-10 md:gap-0 border-4 border-white ring-1 ring-gray-100">
             
-            {/* Decoración de fondo (Círculos sutiles) */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-900/20 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+            {/* Decoración de fondo (Círculos sutiles - z-0) */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none z-0" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-900/20 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2 pointer-events-none z-0" />
 
-            {/* --- LADO IZQUIERDO: ICONOS ANIMADOS (NUEVO) --- */}
-            <div className="relative w-full md:w-1/2 flex justify-center items-center h-[280px]">
+            {/* --- LADO IZQUIERDO: ICONOS ANIMADOS (CORREGIDO z-index) --- */}
+            {/* Se añadió 'z-10' para que estén delante del fondo pero detrás del texto si se cruzan */}
+            <div className="relative w-full md:w-1/2 flex justify-center items-center h-[280px] z-10">
                 
                 {/* Luz de fondo */}
                 <div className="absolute w-64 h-64 bg-white/20 rounded-full blur-[80px]"></div>
 
-                {/* ICONO CENTRAL: PAQUETE DE GUÍAS (Glassmorphism) */}
+                {/* ICONO CENTRAL: PAQUETE DE GUÍAS */}
                 <motion.div 
                     animate={{ y: [0, -15, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -46,7 +47,7 @@ export default function VolumeDiscount() {
                     </motion.div>
                 </motion.div>
 
-                {/* ICONO SATÉLITE 1: DESCUENTO % (Flota y rota) */}
+                {/* ICONO SATÉLITE 1: DESCUENTO % */}
                 <motion.div 
                     animate={{ y: [0, 10, 0], rotate: [0, 10, 0] }}
                     transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
@@ -55,7 +56,7 @@ export default function VolumeDiscount() {
                     <Percent size={32} fill="currentColor" />
                 </motion.div>
 
-                {/* ICONO SATÉLITE 2: ETIQUETAS MÚLTIPLES (Flota) */}
+                {/* ICONO SATÉLITE 2: ETIQUETAS MÚLTIPLES */}
                 <motion.div 
                     animate={{ y: [0, -10, 0], x: [0, -5, 0] }}
                     transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
@@ -64,7 +65,7 @@ export default function VolumeDiscount() {
                     <Tags size={32} className="text-white" />
                 </motion.div>
 
-                 {/* ETIQUETA DE PRECIO FLOTANTE (Más pequeña, como detalle) */}
+                 {/* ETIQUETA DE PRECIO FLOTANTE */}
                  <motion.div 
                     animate={{ scale: [1, 1.1, 1] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -75,8 +76,9 @@ export default function VolumeDiscount() {
 
             </div>
 
-            {/* --- LADO DERECHO: TEXTO --- */}
-            <div className="w-full md:w-1/2 text-center md:text-left text-white z-20 pl-0 md:pl-10">
+            {/* --- LADO DERECHO: TEXTO (CORREGIDO z-index) --- */}
+            {/* Se aseguró 'z-20' para que el texto siempre esté al frente */}
+            <div className="w-full md:w-1/2 text-center md:text-left text-white z-20 pl-0 md:pl-10 relative">
                 <h3 className="text-4xl md:text-6xl font-black mb-4 tracking-tight leading-none drop-shadow-md">
                     15% DE <br/>DESCUENTO
                 </h3>
@@ -94,8 +96,6 @@ export default function VolumeDiscount() {
 
         {/* --- BOTONES INFERIORES --- */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-            
-            {/* Botón 1: Más información */}
             <Link 
                 href="#" 
                 className="group flex items-center gap-3 bg-[#25D366] text-white px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl hover:bg-[#20bd5a] transition-all transform hover:-translate-y-1 min-w-[240px] justify-center"
@@ -104,7 +104,6 @@ export default function VolumeDiscount() {
                 Más información
             </Link>
 
-            {/* Botón 2: Registrarme */}
             <Link 
                 href="#" 
                 className="group flex items-center gap-3 bg-[#2A0342] text-white px-8 py-4 rounded-full text-lg font-bold shadow-lg hover:shadow-xl hover:bg-black transition-all transform hover:-translate-y-1 min-w-[240px] justify-center"
@@ -112,7 +111,6 @@ export default function VolumeDiscount() {
                 <UserPlus size={24} />
                 Registrarme
             </Link>
-
         </div>
 
       </div>
